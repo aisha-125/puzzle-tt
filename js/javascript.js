@@ -62,8 +62,12 @@ function selectFigure() {
 sizeContainer(centerContainer);
 mapGrip(map.width, map.height);
 
-const s = new Square({ x: 0, y: 0 }, mctx);
+const s = new Square(mctx);
 s.drawSquares();
+
+mapGrip(map.width, map.height);
 
 
 setPoints();
+
+setInterval(s.fall(), 5000);
