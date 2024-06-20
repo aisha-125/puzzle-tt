@@ -1,0 +1,6 @@
+game:
+  name: Tetris
+
+  tetris:  
+    score: Score
+    points: points
