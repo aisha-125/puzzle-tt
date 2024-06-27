@@ -41,20 +41,11 @@ function selectFigure() {
 
 function start() {
 	const s = new Square(map);
-	s.drawSquares();
-
-	function update() {
-    s.fall();
-  }
-  const interval = setInterval(update, 1000);
-	// Poner el interval dentro de la propia clase,
-	// en una variable "cayendo" o "stateFall"
+	s.start();
 }
 
 //Calls
 sizeContainer(centerContainer);
-map.mapGrip();
-map.saveState();
+setPoints();
 
 start();
-setPoints();
