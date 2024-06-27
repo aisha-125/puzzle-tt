@@ -1,11 +1,12 @@
 import Square from "../class/Square.js";
+import Map from "../class/Map.js"
 
 //Variables
 const centerContainer = document.getElementById('center-container');
+const canvas = document.getElementById('game');
 const score = document.getElementById('score');
-const map = document.getElementById('game');
-const mctx = map.getContext("2d");
-const figures = ['BlueRicky', 'ClevelandZ', 'Hero', 'OrangeRicky', 'RodhelIsland', 'Smashboy', 'Teewee'];
+const figures = ['BlueRicky', 'ClevelandZ', 'Hero', 'OrangeRicky', 'RodhelIsland', 'Smashboy', 'Teewee', 'Square'];
+const map = new Map(canvas);
 
 let points = 0;
 let combo = 1;
@@ -21,35 +22,16 @@ function sizeContainer(container) {
 };
 
 //Game
+
 function setPoints() {
 	score.innerText = `${points} points`;
-};
-
-function mapGrip(width, height) {
-	let squareSize = 40;
-	mctx.strokeStyle = "lightblue";
-	mctx.lineWidth = 0.5;
-
-	for (let x = squareSize; x <= width; x += squareSize) {
-		mctx.beginPath();
-		mctx.moveTo(x, 0);
-		mctx.lineTo(x, height);
-		mctx.stroke();
-	}
-
-	for (let y = 0; y <= height; y += squareSize) {
-		mctx.beginPath();
-		mctx.moveTo(0, y);
-		mctx.lineTo(width, y);
-		mctx.stroke();
-	}
 };
 
 function addPoints() {
 	points = points + 50 * combo;
 	console.log(points);
 	setPoints();
-	combo*2;
+	combo * 2;
 };
 
 function selectFigure() {
@@ -57,17 +39,22 @@ function selectFigure() {
 	console.log(figures[i]);
 };
 
+function start() {
+	const s = new Square(map);
+	s.drawSquares();
+
+	function update() {
+    s.fall();
+  }
+  const interval = setInterval(update, 1000);
+	// Poner el interval dentro de la propia clase,
+	// en una variable "cayendo" o "stateFall"
+}
 
 //Calls
 sizeContainer(centerContainer);
-mapGrip(map.width, map.height);
+map.mapGrip();
+map.saveState();
 
-const s = new Square(mctx);
-s.drawSquares();
-
-mapGrip(map.width, map.height);
-
-
+start();
 setPoints();
-
-setInterval(s.fall(), 5000);

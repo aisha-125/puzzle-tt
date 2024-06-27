@@ -17,12 +17,6 @@ class Square extends Figure {
 
     return positions;
   }
-
-  drawSquares() {
-    for (const position of this.positions) {
-      super.drawSquare(position, this.color);
-    }
-  }
 }
 
 export default Square;
