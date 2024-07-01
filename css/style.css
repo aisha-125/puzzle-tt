@@ -13,7 +13,7 @@ body {
 
 #center-container {
 	position: absolute;
-	top: 5%;
+	top: 7%;
 	left: 50%;
 	transform: translate(-50%);
 }
@@ -21,15 +21,16 @@ body {
 /* Game layout */
 
 .col-md-8 {
-	background-color: red;
+	display: flex;
+	justify-content: end;
 }
 
 .col-md-4 {
-	background-color: blue;
+	/* background-color: blue; */
 }
 
 #game {
-	background-color: rgb(230, 255, 254);
+	background-color: #060743;
 }
 
 /* Score layout */

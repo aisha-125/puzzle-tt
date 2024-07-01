@@ -6,17 +6,12 @@ class Figure {
   constructor(map) {
     this.map = map;
     this.mctx = this.map.ctx;
-    this.positions = this.calcPositions();
   };
   
   start(){
     this.drawSquares();
     this.interval = setInterval(() => this.fall(), 1000);
   }
-
-  calcPositions() {
-    throw new Error("calcPositions() debe ser implementado por la subclase");
-  };
 
   drawSquares() {
     this.positions.forEach(position => this.drawSquare(position, this.color));
@@ -31,11 +26,11 @@ class Figure {
     const y = this.resize(position.y);
     
     this.mctx.fillStyle = color;
-    this.mctx.fillRect(x, y, this.squareSize, this.squareSize);
+    this.mctx.fillRect(x+2, y+2, this.squareSize -4, this.squareSize-4);
     
-    this.mctx.strokeStyle = 'lightblue';
+    this.mctx.strokeStyle = 'black';
     this.mctx.lineWidth = 0.5;
-    this.mctx.strokeRect(x, y, this.squareSize, this.squareSize);
+    this.mctx.strokeRect(x+1, y+1, this.squareSize-2, this.squareSize-2);
   };
 
   endMap() {
