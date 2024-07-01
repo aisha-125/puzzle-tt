@@ -14,6 +14,7 @@ const score = document.getElementById('score');
 const figures = ['Hero', 'Smashboy', 'Teewee', 'OrangeRicky', 'BlueRicky', 'ClevelandZ', 'RodhelIslandZ'];
 const map = new Map(canvas);
 
+let s;
 let points = 0;
 let combo = 1;
 
@@ -46,7 +47,6 @@ function selectFigure() {
 };
 
 function generateFigure() {
-	let s;
 	switch (selectFigure()) {
 		case 'Teewee':
 			s = new Teewee(map);
@@ -74,6 +74,14 @@ function generateFigure() {
 			break;
 	}
 	s.start();
+	document.addEventListener('keypress', (e) => {
+		let ltr = e.key;
+		if (ltr === "a") {
+			s.left();
+		} else if (ltr === "d") {
+			s.right();
+		}
+	});
 }
 
 function start() {

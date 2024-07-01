@@ -33,7 +33,7 @@ class Figure {
     this.mctx.strokeRect(x+1, y+1, this.squareSize-2, this.squareSize-2);
   };
 
-  endMap() {
+  endBottom() {
     let overflow = false;
     this.positions.forEach(position => {
       if (this.resize(position.y) + this.squareSize >= this.map.canvas.height) {
@@ -42,15 +42,51 @@ class Figure {
     });
     return overflow;
   };
+  
+  endLeft() {
+    let overflow = false;
+    this.positions.forEach(position => {
+      if (this.resize(position.x) === 0) {
+        overflow = true;
+      }
+    });
+    return overflow;
+  };
+  
+  endRight() {
+    let overflow = false;
+    this.positions.forEach(position => {
+      if (this.resize(position.x) + this.squareSize >= this.map.canvas.width) {
+        overflow = true;
+      }
+    });
+    return overflow;
+  };
 
   fall() {
-    if (!this.endMap()) {
+    if (!this.endBottom()) {
       this.map.restoreState();
       this.positions.forEach(position => position.y = position.y + 1);
       this.drawSquares();
     } else {
       this.map.saveState();
       clearInterval(this.interval);
+    }
+  };
+
+  left() {
+    if (!this.endLeft()) {
+      this.map.restoreState();
+      this.positions.forEach(position => position.x = position.x -1);
+      this.drawSquares();
+    }
+  };
+
+  right() {
+    if (!this.endRight()) {
+      this.map.restoreState();
+      this.positions.forEach(position => position.x = position.x +1);
+      this.drawSquares();
     }
   };
 }
