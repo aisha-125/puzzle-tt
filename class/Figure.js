@@ -1,17 +1,30 @@
 class Figure {
-  squareSize = 40;
-  numberSquares = 4;
-  interval = null;
-
-  constructor(map) {
+  
+  constructor(map, game) {
+    this.squareSize = 40;
+    this.numberSquares = 4;
+    this.interval = null;
     this.map = map;
     this.mctx = this.map.ctx;
+    this.game = game;
   };
   
   start(){
+    this.addMoveEvent();
     this.drawSquares();
     this.interval = setInterval(() => this.fall(), 1000);
-  }
+  };
+
+  addMoveEvent() {
+    document.addEventListener('keydown', (e) => {
+      let ltr = e.key.toLowerCase();
+      if (ltr === 'a' || ltr === 'arrowleft') {
+        this.left();
+      } else if (ltr === 'd' || ltr === 'arrowright') {
+        this.right();
+      }
+    });
+  };
 
   drawSquares() {
     this.positions.forEach(position => this.drawSquare(position, this.color));
@@ -71,6 +84,7 @@ class Figure {
     } else {
       this.map.saveState();
       clearInterval(this.interval);
+      this.game.generateFigure();
     }
   };
 
