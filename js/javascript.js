@@ -24,7 +24,7 @@ function sizeContainer(container) {
 };
 
 function start() {
-	game.generateFigure();
+	game.start();
 }
 
 //Calls

@@ -1,12 +1,11 @@
 class Figure {
   
-  constructor(map, game) {
-    this.squareSize = 40;
-    this.numberSquares = 4;
+  constructor(game) {
+    this.squareSize = game.map.squareSize;
     this.interval = null;
-    this.map = map;
-    this.mctx = this.map.ctx;
     this.game = game;
+    this.map = this.game.map;
+    this.mctx = this.map.ctx;
   };
   
   start(){
@@ -49,7 +48,7 @@ class Figure {
   endBottom() {
     let overflow = false;
     this.positions.forEach(position => {
-      if (this.resize(position.y) + this.squareSize >= this.map.canvas.height) {
+      if (this.resize(position.y) + this.squareSize >= this.map.height) {
         overflow = true;
       }
     });
@@ -69,7 +68,7 @@ class Figure {
   endRight() {
     let overflow = false;
     this.positions.forEach(position => {
-      if (this.resize(position.x) + this.squareSize >= this.map.canvas.width) {
+      if (this.resize(position.x) + this.squareSize >= this.map.width) {
         overflow = true;
       }
     });

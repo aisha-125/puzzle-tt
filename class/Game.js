@@ -15,7 +15,13 @@ class Game {
     this.figure;
   };
 
+  start() {
+    this.setPoints();
+    this.generateFigure();
+  };
+
   setPoints() {
+    let points = 0;
     score.innerText = `${points} points`;
   };
 
@@ -33,28 +39,28 @@ class Game {
   generateFigure() {
     switch (this.selectFigure()) {
       case 'Teewee':
-        this.figure = new Teewee(this.map, this);
+        this.figure = new Teewee(this);
         break;
       case 'Hero':
-        this.figure = new Hero(this.map, this);
+        this.figure = new Hero(this);
         break;
       case 'Smashboy':
-        this.figure = new Smashboy(this.map, this);
+        this.figure = new Smashboy(this);
         break;
       case 'BlueRicky':
-        this.figure = new BlueRicky(this.map, this);
+        this.figure = new BlueRicky(this);
         break;
       case 'OrangeRicky':
-        this.figure = new OrangeRicky(this.map, this);
+        this.figure = new OrangeRicky(this);
         break;
       case 'ClevelandZ':
-        this.figure = new ClevelandZ(this.map, this);
+        this.figure = new ClevelandZ(this);
         break;
       case 'RodhelIslandZ':
-        this.figure = new RodhelIslandZ(this.map, this);
+        this.figure = new RodhelIslandZ(this);
         break;
       default:
-        this.figure = new Smashboy(this.map, this);
+        this.figure = new Smashboy(this);
         break;
       }
       this.figure.start();
