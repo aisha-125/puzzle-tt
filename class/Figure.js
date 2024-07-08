@@ -9,20 +9,8 @@ class Figure {
   };
   
   start(){
-    this.addMoveEvent();
     this.drawSquares();
     this.interval = setInterval(() => this.fall(), 1000);
-  };
-
-  addMoveEvent() {
-    document.addEventListener('keydown', (e) => {
-      let ltr = e.key.toLowerCase();
-      if (ltr === 'a' || ltr === 'arrowleft') {
-        this.left();
-      } else if (ltr === 'd' || ltr === 'arrowright') {
-        this.right();
-      }
-    });
   };
 
   drawSquares() {
@@ -45,50 +33,20 @@ class Figure {
     this.mctx.strokeRect(x+1, y+1, this.squareSize-2, this.squareSize-2);
   };
 
-  endBottom() {
-    let overflow = false;
-    this.positions.forEach(position => {
-      if (this.resize(position.y) + this.squareSize >= this.map.height) {
-        overflow = true;
-      }
-    });
-    return overflow;
-  };
-  
-  endLeft() {
-    let overflow = false;
-    this.positions.forEach(position => {
-      if (this.resize(position.x) === 0) {
-        overflow = true;
-      }
-    });
-    return overflow;
-  };
-  
-  endRight() {
-    let overflow = false;
-    this.positions.forEach(position => {
-      if (this.resize(position.x) + this.squareSize >= this.map.width) {
-        overflow = true;
-      }
-    });
-    return overflow;
-  };
-
   fall() {
-    if (!this.endBottom()) {
+    if (this.game.checkBottomCells(this.positions)) {
       this.map.restoreState();
       this.positions.forEach(position => position.y = position.y + 1);
       this.drawSquares();
     } else {
       this.map.saveState();
       clearInterval(this.interval);
-      this.game.generateFigure();
+      this.game.next(this.positions);
     }
   };
 
   left() {
-    if (!this.endLeft()) {
+    if (this.game.checkLeftCells(this.positions)) {
       this.map.restoreState();
       this.positions.forEach(position => position.x = position.x -1);
       this.drawSquares();
@@ -96,7 +54,7 @@ class Figure {
   };
 
   right() {
-    if (!this.endRight()) {
+    if (this.game.checkRightCells(this.positions)) {
       this.map.restoreState();
       this.positions.forEach(position => position.x = position.x +1);
       this.drawSquares();
