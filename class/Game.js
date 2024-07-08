@@ -13,8 +13,8 @@ class Game {
     this.score = score;
     this.figures = figures;
     this.figure;
-    this.addMoveEvent();
     this.cells = this.freeCells();
+    this.setPoints();
   };
 
   addMoveEvent() {
@@ -43,6 +43,7 @@ class Game {
 
   start() {
     this.setPoints();
+    this.addMoveEvent();
     this.generateFigure();
   };
 
@@ -114,7 +115,6 @@ class Game {
   checkLeftCells(positions) {
     let free = true;
     positions.forEach(position => {
-      console.log(position.x);
       if (this.cells[position.y][position.x - 1] != 0) {
         free = false;
       }
