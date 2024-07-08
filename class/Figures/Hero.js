@@ -4,8 +4,8 @@ class Hero extends Figure {
   color = '#21cdff';
   positions = [{x: 3, y:0},{x: 4, y:0},{x: 5, y:0},{x: 6, y:0}];
   
-  constructor(map, game) {
-    super(map, game);
+  constructor(game) {
+    super(game);
   }
 }
 

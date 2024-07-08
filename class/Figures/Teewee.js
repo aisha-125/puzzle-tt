@@ -4,8 +4,8 @@ class Teewee extends Figure {
   color = '#b231f0';
   positions = [{x: 3, y:0},{x: 4, y:0},{x: 5, y:0},{x: 4, y:-1}];
   
-  constructor(map, game) {
-    super(map, game);
+  constructor(game) {
+    super(game);
   }
 }
 
