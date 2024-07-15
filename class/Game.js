@@ -13,6 +13,7 @@ class Game {
     this.score = score;
     this.figures = figures;
     this.figure;
+    this.nextFigure;
     this.cells = this.freeCells();
     this.setPoints();
   };
@@ -44,7 +45,9 @@ class Game {
   start() {
     this.setPoints();
     this.addMoveEvent();
-    this.generateFigure();
+    this.figure = this.generateFigure();
+    this.figure.start();
+    this.nextFigure = this.generateFigure();
   };
 
   // addPoints() {
@@ -59,33 +62,34 @@ class Game {
   };
 
   generateFigure() {
+    let figure = null;
     switch (this.selectFigure()) {
       case 'Teewee':
-        this.figure = new Teewee(this);
+        figure = new Teewee(this);
         break;
       case 'Hero':
-        this.figure = new Hero(this);
+        figure = new Hero(this);
         break;
       case 'Smashboy':
-        this.figure = new Smashboy(this);
+        figure = new Smashboy(this);
         break;
       case 'BlueRicky':
-        this.figure = new BlueRicky(this);
+        figure = new BlueRicky(this);
         break;
       case 'OrangeRicky':
-        this.figure = new OrangeRicky(this);
+        figure = new OrangeRicky(this);
         break;
       case 'ClevelandZ':
-        this.figure = new ClevelandZ(this);
+        figure = new ClevelandZ(this);
         break;
       case 'RodhelIslandZ':
-        this.figure = new RodhelIslandZ(this);
+        figure = new RodhelIslandZ(this);
         break;
       default:
-        this.figure = new Smashboy(this);
+        figure = new Smashboy(this);
         break;
     }
-    this.figure.start();
+    return figure;
   };
 
   savePositions(positions) {
@@ -94,7 +98,10 @@ class Game {
 
   next(positions) {
     this.savePositions(positions);
-    this.generateFigure();
+    this.figure = this.nextFigure;
+    this.figure.start();
+    this.nextFigure = this.generateFigure();
+    console.log(this.nextFigure);
   };
 
   resize(position) {
@@ -115,9 +122,11 @@ class Game {
   checkLeftCells(positions) {
     let free = true;
     positions.forEach(position => {
-      if (this.cells[position.y][position.x - 1] != 0) {
-        free = false;
-      }
+      if (position.y >= 0) {
+        if (this.cells[position.y][position.x - 1] != 0) {
+          free = false;
+        };
+      };
     })
     return free;
   };
@@ -125,9 +134,11 @@ class Game {
   checkRightCells(positions) {
     let free = true;
     positions.forEach(position => {
-      if (this.cells[position.y][position.x +1] != 0) {
-        free = false;
-      }
+      if (position.y >= 0) {
+        if (this.cells[position.y][position.x + 1] != 0) {
+          free = false;
+        };
+      };
     })
     return free;
   };

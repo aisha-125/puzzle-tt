@@ -10,7 +10,7 @@ class Figure {
   
   start(){
     this.drawSquares();
-    this.interval = setInterval(() => this.fall(), 1000);
+    this.interval = setInterval(() => this.fall(), 800);
   };
 
   drawSquares() {
