@@ -11,19 +11,22 @@
 </head>
 
 <body class="background">
+	<div>
+		<h2>Score: <span id="score"></span></h2>
+	</div>
 	<div id="main-container">
+		<div id="btn-container">
+			<button id="start-btn" onclick="start()"><span>Start</span></button>
+		</div>
 		<div class="row">
 			<main class="col col-md-8">
 				<canvas id="game" width="400" height="600"></canvas>
 			</main>
+			<aside>
+				<canvas id="nextPiece" width="160" height="80"></canvas>
+			</aside>
 		</div>
 	</div>
-	<div id="btn-container">
-		<button id="start-btn" onclick="start()"><span>Start</span></button>
-	</div>
-	<aside class="col col-md-4">
-		<h2>Score: <span id="score"></span></h2>
-	</aside>
 </body>
 
 </html>

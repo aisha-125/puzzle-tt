@@ -8,8 +8,9 @@ import RodhelIslandZ from "../class/Figures/RodheIslandZ.js";
 
 class Game {
 
-  constructor(map, score, figures) {
+  constructor(map, frame, score, figures) {
     this.map = map;
+    this.frame = frame;
     this.score = score;
     this.figures = figures;
     this.figure;
@@ -46,8 +47,10 @@ class Game {
     this.setPoints();
     this.addMoveEvent();
     this.figure = this.generateFigure();
-    this.figure.start();
+
     this.nextFigure = this.generateFigure();
+    this.figure.start();
+    this.nextFigure.showSquares();
   };
 
   // addPoints() {
@@ -99,9 +102,11 @@ class Game {
   next(positions) {
     this.savePositions(positions);
     this.figure = this.nextFigure;
-    this.figure.start();
+
     this.nextFigure = this.generateFigure();
-    console.log(this.nextFigure);
+    this.figure.start();
+    this.frame.restoreState();
+    this.nextFigure.showSquares();
   };
 
   resize(position) {

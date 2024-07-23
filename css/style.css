@@ -61,7 +61,7 @@ button:hover {
 	position: absolute;
 }
 
-#game {
+#game, #nextPiece {
 	background-color: #060743;
 }
 
