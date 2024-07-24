@@ -1,9 +1,9 @@
 class Map {
 
-  constructor(canvas) {
+  constructor(canvas, squareSize) {
     this.width = canvas.width;
     this.height = canvas.height;
-    this.squareSize = this.width / 10;
+    this.squareSize = squareSize;
     this.ctx = canvas.getContext("2d");
     this.savedState = null;
     this.start();
