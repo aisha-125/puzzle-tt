@@ -14,23 +14,30 @@ class Figure {
   };
 
   drawSquares() {
-    this.positions.forEach(position => this.drawSquare(position, this.color));
+    this.positions.forEach(position => this.drawSquare(position, this.color, this.mctx));
   };
+
+  showSquares() {
+    this.positions.forEach(position => {
+      let showPosition = {x: position.x - 3, y:position.y + 1};
+      this.drawSquare(showPosition, this.color, this.game.frame.ctx)
+    });
+  }
 
   resize(position) {
     return position * this.squareSize;
   };
 
-  drawSquare(position, color) {
+  drawSquare(position, color, canvas) {
     const x = this.resize(position.x);
     const y = this.resize(position.y);
     
-    this.mctx.fillStyle = color;
-    this.mctx.fillRect(x+2, y+2, this.squareSize -4, this.squareSize-4);
+    canvas.fillStyle = color;
+    canvas.fillRect(x+2, y+2, this.squareSize -4, this.squareSize-4);
     
-    this.mctx.strokeStyle = 'black';
-    this.mctx.lineWidth = 0.5;
-    this.mctx.strokeRect(x+1, y+1, this.squareSize-2, this.squareSize-2);
+    canvas.strokeStyle = 'black';
+    canvas.lineWidth = 0.5;
+    canvas.strokeRect(x+1, y+1, this.squareSize-2, this.squareSize-2);
   };
 
   fall() {
