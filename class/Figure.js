@@ -10,7 +10,7 @@ class Figure {
   
   start(){
     this.drawSquares();
-    this.interval = setInterval(() => this.fall(), 800);
+    this.interval = setInterval(() => this.down(), 800);
   };
 
   drawSquares() {
@@ -40,7 +40,7 @@ class Figure {
     canvas.strokeRect(x+1, y+1, this.squareSize-2, this.squareSize-2);
   };
 
-  fall() {
+  down() {
     if (this.game.checkBottomCells(this.positions)) {
       this.map.restoreState();
       this.positions.forEach(position => position.y = position.y + 1);

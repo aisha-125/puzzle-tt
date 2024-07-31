@@ -26,6 +26,8 @@ class Game {
         this.figure.left();
       } else if (ltr === 'd' || ltr === 'arrowright') {
         this.figure.right();
+      } else if(ltr === 's' || ltr === 'arrowdown'){
+        this.figure.down();
       }
     });
   };
