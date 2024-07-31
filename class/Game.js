@@ -114,11 +114,11 @@ class Game {
       this.figure = this.nextFigure;
       this.nextFigure = this.generateFigure();
       this.figure.start();
+      this.frame.restoreState();
       this.nextFigure.showSquares();
     } else {
       this.gameOver();
     }
-    this.frame.restoreState();
   };
 
   resize(position) {
