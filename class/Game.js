@@ -8,15 +8,15 @@ import RodhelIslandZ from "../class/Figures/RodheIslandZ.js";
 
 class Game {
 
-  constructor(map, frame, score, figures) {
+  constructor(map, frame, score, gameOverText) {
     this.map = map;
     this.frame = frame;
     this.score = score;
-    this.figures = figures;
+    this.gameOverText = gameOverText;
+    this.figures = ['Hero', 'Smashboy', 'Teewee', 'OrangeRicky', 'BlueRicky', 'ClevelandZ', 'RodhelIslandZ'];
     this.figure;
     this.nextFigure;
     this.cells = this.freeCells();
-    this.setPoints();
   };
 
   addMoveEvent() {
@@ -96,17 +96,27 @@ class Game {
   };
 
   savePositions(positions) {
-    positions.forEach(position => this.cells[position.y][position.x] = 1);
+    let positionsFree = true;
+    positions.forEach(position => {
+      if (position.y >= 0) {
+        this.cells[position.y][position.x] = 1
+      } else {
+        positionsFree = false;
+      }
+    });
+    return positionsFree;
   };
-
+  
   next(positions) {
-    this.savePositions(positions);
-    this.figure = this.nextFigure;
-
-    this.nextFigure = this.generateFigure();
-    this.figure.start();
+    if (this.savePositions(positions)) {
+      this.figure = this.nextFigure;
+      this.nextFigure = this.generateFigure();
+      this.figure.start();
+      this.nextFigure.showSquares();
+    } else {
+      this.gameOver();
+    }
     this.frame.restoreState();
-    this.nextFigure.showSquares();
   };
 
   resize(position) {
@@ -146,6 +156,10 @@ class Game {
       };
     })
     return free;
+  };
+
+  gameOver() {
+    this.gameOverText.style.display = 'block';
   };
 };
 
