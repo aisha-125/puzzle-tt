@@ -67,6 +67,10 @@ class Figure {
       this.drawSquares();
     }
   };
+
+  rotate(){
+    
+  };
 }
 
 export default Figure;

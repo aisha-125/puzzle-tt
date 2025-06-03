@@ -69,12 +69,12 @@
 }
 
 #game,
-#nextPiece {
+#next-piece {
 	background-color: #060743;
 }
 
 /* Game Over */
-#gameOver {
+#gameover {
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -85,7 +85,7 @@
 	z-index: 100;
 }
 
-#gameOverText {
+#gameover-text {
 	font-size: 4em;
 	text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 	animation: pulse 2s infinite, textGlow 1.5s infinite alternate;
@@ -126,7 +126,7 @@
 	}
 }
 
-#retryButton {
+#retry-btn {
 	font-size: 1.5em;
 	background-color: rgba(43, 71, 255, 0);
 	border: none;
@@ -135,7 +135,7 @@
 	transition: background-color 0.3s ease;
 }
 
-#retryButton:hover {
+#retry-btn:hover {
 	animation: rotate360 0.4s linear;
 }
 
@@ -149,7 +149,7 @@
 	}
 }
 
-#retryButton .bi {
+#retry-btn .bi {
 	font-size: 3em;
 }
 
